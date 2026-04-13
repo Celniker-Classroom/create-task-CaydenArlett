@@ -7,7 +7,30 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>Your html goes here...</h1>
-    <br>See the <a href="README.md">README</a> for project details
+    <div id = "container">
+        <!-- I am making a hangman game that will have a start button which enables all buttons generates 
+        a random word using a array of possible words and then the user can guess letters or words 
+        using the guess button. The guess button will call a method that will check if the word contains
+        the guesed letter or if they guess a word it will check if the word is correct. The user will have 
+        6 lives and each wrong guess will take away a life. The game will also keep track of wins, losses, 
+        average guesses, and guess accuracy. -->
+        <h1>Hangman</h1>
+        <!-- hanganman image goes here -->
+        <p id="lives">Lives: 6</p>
+
+        <div id="buttons">
+            <button id="startGame">Start Game</button>
+            <button id="guessWord">Guess Word</button>
+        </div>
+        <input type="text" id="guess-input" placeholder="Enter your guess">
+        <div id="stats">
+            <h2>Stats</h2>
+            <p id ="wins">Wins: 0</p>
+            <p id="losses">Losses: 0</p>
+            <p id="averageGuesses">Average Guesses: 0</p>
+            <p id= "guessAcuracy">Guess Accuracy: 0%</p>
+        </div>
+
+    </div>
 </body>
 </html>
