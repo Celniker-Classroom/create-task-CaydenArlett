@@ -17,7 +17,7 @@
         <h1>Hangman</h1>
 
         <div id="startGame">
-            <input type = radio name="difficulty" id="easy" value="easy">
+            <input type = radio name="difficulty" id="easy" value="easy" checked>
             <label for="easy">Easy</label>
             <input type = radio name="difficulty" id="medium" value="medium">
             <label for="medium">Medium</label>
@@ -27,19 +27,23 @@
         </div>
 
         <div id="guess">
-            <input type="text" id="guess-input" placeholder="Enter your guess">
-            <button id="guessBtn">Guess Word</button>
+            <input type="text" id="guessInput" placeholder="Enter your guess">
+            <button id="guessBtn" disabled>Guess Word</button>
         </div>
         <!-- hanganman image goes here -->
         <p id="lives">Lives: 6</p>
         
         <p id="wordDisplay">_ _ _ _ _</p>
 
+        <p id="failedGuesses">Guesses: </p>
+        
+        <p id="message"></p>
+
         <div id="stats">
             <h2>Stats</h2>
             <p id ="wins">Wins: 0</p>
             <p id="losses">Losses: 0</p>
-            <p id="averageGuesses">Average Guesses: 0</p>
+            <p id="averageGuesses">Average Guesses For Wins: 0</p>
             <p id= "guessAcuracy">Guess Accuracy: 0%</p>
         </div>
 
