@@ -45,16 +45,15 @@ function startGame(difficulty) {
     //generates a random word based on the difficulty selected
     var easyWordBank = ["apple", "beach", "bread", "brush", "chair", "chest", "cloud", "dance", "dream", "drink", "earth", "field", "floor", "fruit", "glass", "grape", "green", "heart", "horse", "house", "juice", "light", "lunch", "money", "month", "music", "night", "ocean", "party", "phone", "piano", "pilot", "plant", "plate", "point", "power", "radio", "river", "scene", "shirt", "sleep", "smile", "sound", "space", "spoon", "table", "train", "truck", "water", "world"];
     var mediumWordBank = ["abode", "ample", "birch", "blimp", "bosch", "brave", "brick", "brisk", "chasm", "chime", "chunk", "cliff", "clout", "crane", "crisp", "dwelt", "elbow", "fancy", "fjord", "flask", "flick", "frank", "frost", "gland", "glyph", "gnarl", "gourd", "graft", "grasp", "hound", "joint", "knelt", "knock", "lynch", "morph", "night", "oxide", "phial", "prowl", "quake", "scalp", "snarl", "spelt", "spout", "squat", "thump", "twirl", "vague", "wharf", "wrest"];
-    var hardWordBank = ["abyss", "askew", "azure", "bagel", "banjo", "bayou", "basil", "blitz", "crypt", "cycle", "dizzy", "duchy", "dwarf", "equip", "fazed", "fjord", "fluff", "frizz", "funny", "gawky", "glyph", "gumbo", "haiku", "hertz", "hyena", "ivory", "jazzy", "jelly", "jiffy", "joker", "jumbo", "kayak", "kazoo", "kinky", "klutz", "knack", "lymph", "mummy", "nymph", "ovary", "pixel", "pizazz", "pneum", "polka", "quartz", "queue", "quips", "rhino", "rhythm", "vixen"];
+    var hardWordBank = ["abyss", "askew", "azure", "bagel", "banjo", "bayou", "basil", "blitz", "crypt", "cycle", "dizzy", "duchy", "dwarf", "equip", "fazed", "fjord", "fluff", "frizz", "funny", "gawky", "glyph", "gumbo", "haiku", "hertz", "hyena", "ivory", "jazzy", "jelly", "jiffy", "joker", "jumbo", "kayak", "kazoo", "klutz", "knack", "lymph", "mummy", "nymph", "pixel", "pizazz", "pneum", "polka", "quartz", "queue", "quips", "rhino", "rhythm", "vixen"];
     var wordBank = [easyWordBank, mediumWordBank, hardWordBank];
     randomWord = wordBank[difficulty][Math.floor(Math.random() * wordBank[difficulty].length)];
     console.log(randomWord);
 }
 //evaluates the user's guess and updates the game state accordingly
-function guessLetter() {
+function guessLetter(guess) {
     guesses++;
     totalGuesses++;
-    var guess = getE("guessInput").value.toLowerCase();
     var message = getE("message");
     if (guess.length == 1 && guess >= "a" && guess <= "z") {
         // checks if the guess is a letter and is in the random word
@@ -109,6 +108,7 @@ function guessLetter() {
 }
 
 getE("startBtn").addEventListener("click", function() {
+    //turns the selected difficulty into a number to be used in the startGame function
     var selectedDifficulty = document.querySelector('input[name="difficulty"]:checked');
     var difficulty = 0;
     if (selectedDifficulty) {
@@ -123,9 +123,10 @@ getE("startBtn").addEventListener("click", function() {
     startGame(difficulty);
 });
 getE("guessBtn").addEventListener("click", function() {
+    //gets the user's guess and validates it before passing it to the guessLetter function
     var guess = getE("guessInput").value.toLowerCase();
     if (guess !== "" && guess.length <= 5 && guess.length >= 1 && typeof guess === "string") {
-        guessLetter();
+        guessLetter(guess);
     }
     else {
         getE("message").textContent = "Please enter a valid guess (1-5 letter word or single letter).";
