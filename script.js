@@ -51,16 +51,16 @@ function startGame(difficulty) {
     console.log(randomWord);
 }
 //evaluates the user's guess and updates the game state accordingly
-function guessLetter(guess) {
+function guessLetter(guess, randomWord1) {
     guesses++;
     totalGuesses++;
     var message = getE("message");
     if (guess.length == 1 && guess >= "a" && guess <= "z") {
         // checks if the guess is a letter and is in the random word
-        if (randomWord.includes(guess)) {
+        if (randomWord1.includes(guess)) {
             //updates the revealed word with the correctly guessed letter
-            for (var i = 0; i < randomWord.length; i++) {
-                if (randomWord[i] === guess) {
+            for (var i = 0; i < randomWord1.length; i++) {
+                if (randomWord1[i] === guess) {
                     revealedWord[i] = guess.toUpperCase();
                 }
             }
@@ -76,12 +76,12 @@ function guessLetter(guess) {
         }
     } else {
         // checks if the guess is the correct word
-        if (randomWord === guess) {
+        if (randomWord1 === guess) {
             wins++;
             message.textContent = "Correct! " + guess.toUpperCase() + " is the correct answer.";
             //reveals the entire word
-            for (var i = 0; i < randomWord.length; i++) {
-                revealedWord[i] = randomWord[i].toUpperCase();
+            for (var i = 0; i < randomWord1.length; i++) {
+                revealedWord[i] = randomWord1[i].toUpperCase();
             }
             getE("wordDisplay").textContent = revealedWord.join(" ");
             resetGame();
@@ -94,7 +94,7 @@ function guessLetter(guess) {
     }
     if (lives <= 0) {
         //resets the game and displays the correct word when the player runs out of lives
-        message.textContent = "Game Over! The correct word was '" + randomWord.toUpperCase() + "'.";
+        message.textContent = "Game Over! The correct word was '" + randomWord1.toUpperCase() + "'.";
         guesses = 0;
         losses++;
         resetGame();
@@ -108,6 +108,7 @@ function guessLetter(guess) {
 }
 
 getE("startBtn").addEventListener("click", function() {
+    
     //turns the selected difficulty into a number to be used in the startGame function
     var selectedDifficulty = document.querySelector('input[name="difficulty"]:checked');
     var difficulty = 0;
@@ -126,7 +127,7 @@ getE("guessBtn").addEventListener("click", function() {
     //gets the user's guess and validates it before passing it to the guessLetter function
     var guess = getE("guessInput").value.toLowerCase();
     if (guess !== "" && guess.length <= 5 && guess.length >= 1 && typeof guess === "string") {
-        guessLetter(guess);
+        guessLetter(guess, randomWord);
     }
     else {
         getE("message").textContent = "Please enter a valid guess (1-5 letter word or single letter).";
