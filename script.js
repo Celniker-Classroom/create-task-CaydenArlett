@@ -33,14 +33,17 @@ function startGame(difficulty) {
     //enables/dissables buttons
     getE("startBtn").disabled = true;
     getE("guessBtn").disabled = false;
-    //resets lives and message
+    //resets lives
     lives = 6;
     lives += difficulty;
     getE("lives").textContent = "Lives: " + lives;
     guesses = 0;
     wrongGuesses = 0;
+    //resets hangman image
     getE("hangmanImage").src = "image/hangman0.svg";
+    //resets message
     getE("message").textContent = "please enter a letter or word to guess";
+    //resets revealed word and failed guesses
     revealedWord = new Array(randomWord.length).fill("_");
     failedGuesses = [];
     getE("failedGuesses").textContent = "Guesses: " + failedGuesses.join(", ");
@@ -52,7 +55,7 @@ function startGame(difficulty) {
     var wordBank = [easyWordBank, mediumWordBank, hardWordBank];
     randomWord = wordBank[difficulty][Math.floor(Math.random() * wordBank[difficulty].length)];
     console.log(randomWord);
-    revealedWord = new Array(randomWord.length).fill("_");
+    //resets the word display
     getE("wordDisplay").textContent = revealedWord.join(" ");
 }
 //evaluates the user's guess and updates the game state accordingly
@@ -73,6 +76,7 @@ function guessLetter(guess, randomWord1) {
             message.textContent = " Correct! " + guess.toUpperCase() + " is in the word.";
             correctGuesses++;
         } else {
+            //updates lives, hangman image, stats on a failed guess
             message.textContent = "Incorrect! " + guess.toUpperCase() + " is not in the word.";
             lives--;
             wrongGuesses++;
@@ -84,9 +88,9 @@ function guessLetter(guess, randomWord1) {
     } else {
         // checks if the guess is the correct word
         if (randomWord1 === guess) {
+            //updates stats and reveals the entire word on a correct guess
             wins++;
             message.textContent = "Correct! " + guess.toUpperCase() + " is the correct answer.";
-            //reveals the entire word
             for (var i = 0; i < randomWord1.length; i++) {
                 revealedWord[i] = randomWord1[i].toUpperCase();
             }
@@ -94,6 +98,7 @@ function guessLetter(guess, randomWord1) {
             resetGame();
             correctGuesses++;
         } else {
+            //updates lives, hangman image, stats on a failed guess
             message.textContent = "Incorrect! " + guess.toUpperCase() + " is not the correct answer.";
             lives--;
             wrongGuesses++;
