@@ -1,0 +1,11 @@
+<svg width="200" height="250" xmlns="http://www.w3.org/2000/svg">
+  <!-- Gallows -->
+  <line x1="50" y1="220" x2="150" y2="220" stroke="#8B4513" stroke-width="4"/>
+  <line x1="100" y1="220" x2="100" y2="50" stroke="#8B4513" stroke-width="4"/>
+  <line x1="100" y1="50" x2="150" y2="50" stroke="#8B4513" stroke-width="4"/>
+  <line x1="150" y1="50" x2="150" y2="70" stroke="#8B4513" stroke-width="4"/>
+  <!-- Head -->
+  <circle cx="150" cy="85" r="15" stroke="#FDBCB4" stroke-width="3" fill="#FDBCB4"/>
+  <!-- Body -->
+  <line x1="150" y1="100" x2="150" y2="150" stroke="#38bdf8" stroke-width="3"/>
+</svg>

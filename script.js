@@ -9,6 +9,7 @@ var correctGuesses = 0;
 var totalGuesses = 0;
 var averageGuesses = 0;
 var guessAcuracy = 0;
+var wrongGuesses = 0;
 
 //helper function to get element by id
 function getE(selectedId){
@@ -37,11 +38,13 @@ function startGame(difficulty) {
     lives += difficulty;
     getE("lives").textContent = "Lives: " + lives;
     guesses = 0;
+    wrongGuesses = 0;
+    getE("hangmanImage").src = "image/hangman0.svg";
     getE("message").textContent = "please enter a letter or word to guess";
-    revealedWord = ["_", "_", "_", "_", "_"];
+    revealedWord = new Array(randomWord.length).fill("_");
     failedGuesses = [];
     getE("failedGuesses").textContent = "Guesses: " + failedGuesses.join(", ");
-    getE("wordDisplay").textContent = "_ _ _ _ _";
+    getE("wordDisplay").textContent = revealedWord.join(" ");
     //generates a random word based on the difficulty selected
     var easyWordBank = ["apple", "beach", "bread", "brush", "chair", "chest", "cloud", "dance", "dream", "drink", "earth", "field", "floor", "fruit", "glass", "grape", "green", "heart", "horse", "house", "juice", "light", "lunch", "money", "month", "music", "night", "ocean", "party", "phone", "piano", "pilot", "plant", "plate", "point", "power", "radio", "river", "scene", "shirt", "sleep", "smile", "sound", "space", "spoon", "table", "train", "truck", "water", "world"];
     var mediumWordBank = ["abode", "ample", "birch", "blimp", "bosch", "brave", "brick", "brisk", "chasm", "chime", "chunk", "cliff", "clout", "crane", "crisp", "dwelt", "elbow", "fancy", "fjord", "flask", "flick", "frank", "frost", "gland", "glyph", "gnarl", "gourd", "graft", "grasp", "hound", "joint", "knelt", "knock", "lynch", "morph", "night", "oxide", "phial", "prowl", "quake", "scalp", "snarl", "spelt", "spout", "squat", "thump", "twirl", "vague", "wharf", "wrest"];
@@ -49,6 +52,8 @@ function startGame(difficulty) {
     var wordBank = [easyWordBank, mediumWordBank, hardWordBank];
     randomWord = wordBank[difficulty][Math.floor(Math.random() * wordBank[difficulty].length)];
     console.log(randomWord);
+    revealedWord = new Array(randomWord.length).fill("_");
+    getE("wordDisplay").textContent = revealedWord.join(" ");
 }
 //evaluates the user's guess and updates the game state accordingly
 function guessLetter(guess, randomWord1) {
@@ -70,6 +75,8 @@ function guessLetter(guess, randomWord1) {
         } else {
             message.textContent = "Incorrect! " + guess.toUpperCase() + " is not in the word.";
             lives--;
+            wrongGuesses++;
+            getE("hangmanImage").src = "image/hangman" + Math.min(wrongGuesses, 8) + ".svg";
             getE("lives").textContent = "Lives: " + lives;
             failedGuesses.push(guess.toUpperCase());
             getE("failedGuesses").textContent = "Guesses: " + failedGuesses.join(", ");
@@ -89,6 +96,8 @@ function guessLetter(guess, randomWord1) {
         } else {
             message.textContent = "Incorrect! " + guess.toUpperCase() + " is not the correct answer.";
             lives--;
+            wrongGuesses++;
+            getE("hangmanImage").src = "image/hangman" + Math.min(wrongGuesses, 8) + ".svg";
             getE("lives").textContent = "Lives: " + lives;
         }
     }
