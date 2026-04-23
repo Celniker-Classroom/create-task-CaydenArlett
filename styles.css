@@ -13,7 +13,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 10px;
+    padding: 8px;
 }
 
 /* Main container styling with dark theme and card design */
@@ -23,7 +23,7 @@ body {
     border: 1px solid rgba(148, 163, 184, 0.15);
     border-radius: 22px;
     box-shadow: 0 20px 50px rgba(15, 23, 42, 0.45);
-    padding: 16px;
+    padding: 8px;
 }
 
 /* Main heading */
@@ -236,12 +236,32 @@ p {
     }
 
     #hangmanImage {
-        max-width: 200px;
+        max-width: 170px;
         margin: 12px auto;
     }
 
     p {
         font-size: 1rem;
+    }
+    #container {
+        padding: 12px;
+        width: min(100%, 800px);
+    }
+    h1 {
+        font-size: 1.8rem;
+    }
+    p, #stats h2 {
+        font-size: 0.85rem;
+        margin: 4px 0;
+    }
+    #startGame, #guess, #stats {
+        margin-top: 8px;
+    }
+}
+/* Media query for larger breakpoints to prevent scrolling for stats */
+@media (min-width: 768px) {
+    #container {
+        width: min(100%, 800px);
     }
 }
 
