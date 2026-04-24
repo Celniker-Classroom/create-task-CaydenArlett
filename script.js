@@ -222,6 +222,11 @@ getE("guessBtn").addEventListener("click", function() {
     var guess = getE("guessInput").value.toLowerCase();
     //!/^[a-z]+$/.test searched on google how to check if a string only contains lower case letters
     if (guess.length === 5 || guess.length === 1 && typeof guess === "string" && /^[a-z]+$/.test(guess)) {
+        if (guess.length === 1 && (failedGuesses.includes(guess.toUpperCase()) || revealedWord.includes(guess.toUpperCase()))) {
+            getE("message").textContent = "You already guessed " + guess.toUpperCase() + "! Try a different letter.";
+            getE("guessInput").value = "";
+            return;
+        }
         guessLetter(guess, randomWord);
     }
     else {
