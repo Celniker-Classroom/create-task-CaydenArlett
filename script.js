@@ -93,6 +93,7 @@ function startCustomGame(difficulty) {
     randomWord = getE("customWordInput").value.toLowerCase();
     //clears the custom word input field
     getE("customWordInput").value = "";
+    //!/^[a-z]+$/.test searched on google how to check if a string only contains lower case letters
     if (randomWord.length < 5|| !/^[a-z]+$/.test(randomWord) || randomWord.length > 5) {
         getE("message").textContent = "Please enter a valid 5 letter word (letters only)";
         getE("startBtn").disabled = false;
@@ -219,7 +220,8 @@ getE("customGameBtn").addEventListener("click",  function() {
 getE("guessBtn").addEventListener("click", function() {
     //gets the user's guess and validates it before passing it to the guessLetter function
     var guess = getE("guessInput").value.toLowerCase();
-    if (guess !== "" && guess.length <= 5 && guess.length >= 1 && typeof guess === "string") {
+    //!/^[a-z]+$/.test searched on google how to check if a string only contains lower case letters
+    if (guess.length === 5 || guess.length === 1 && typeof guess === "string" && /^[a-z]+$/.test(guess)) {
         guessLetter(guess, randomWord);
     }
     else {
